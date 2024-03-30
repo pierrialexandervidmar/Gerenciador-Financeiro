@@ -1,5 +1,4 @@
 // Funçjões para consultas e ações de datas
-
 import { Item } from '../types/Item';
 
 // Retorna o Ano e Mẽs. Ex: 2024-03
@@ -39,3 +38,11 @@ export const formatDate = (date: Date): string => {
 
 // formata o dia e mês para incluir um zero quando necessário
 const addZeroToDate = (n: number): string => n < 10 ? `0${n}` : `${n}`;
+
+// Formatar o mês a ser exibido
+export const formatCurrentMonth = (currentMonth: string): string => {
+  let [year, month] = currentMonth.split('-');
+  let months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+  return `${months[parseInt(month) - 1]} de ${year}`;
+}
