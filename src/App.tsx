@@ -17,9 +17,29 @@ const App = () => {
   const [income, setIncome] = useState(0);
   const [expense, setExpense] = useState(0);
 
+  // Monitora a lista filtrada, sempre que houver mudança
   useEffect(() => {
     setFilteredList(filterListByMonth(list, currentMonth))
   }, [list, currentMonth]);
+
+  // Monitora os valores da lista filtrada e faz os cálculos
+  useEffect(() => {
+    let incomeCount = 0;
+    let expenseCount = 0;
+
+    for(let i in filteredList) {
+      // SE as categorias da lista filtrada em tela for do tipo expense
+      if(categories[filteredList[i].category].expense) {
+        expenseCount += filteredList[i].value;
+      } else {
+        incomeCount += filteredList[i].value;
+      }
+    }
+
+    setIncome(incomeCount);
+    setExpense(expenseCount);    
+
+  }, [filteredList]);
 
   const handleMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
